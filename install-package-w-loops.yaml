@@ -4,7 +4,7 @@
   tasks:
   - name: install packages using loops concept in redhat machine
     ansible.bultin.dnf:
-      name: {{ item }}
+      name: "{{ item }}"
       state: installed
     loop:
     - gcc
@@ -15,7 +15,7 @@
 
   - name: install packages using loops in ubuntu machine
     ansible.builtin.apt:
-      name: {{ item }}
+      name: "{{ item }}"
       state: installed
     loop:
     - gcc
