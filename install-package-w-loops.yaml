@@ -1,14 +1,25 @@
-- name: install packages in 2 nodes
+- name: install packages using install
   hosts: web
   become: yes
   tasks:
-    - name: install packages using loops concept
-      ansible.builtin.dnf:
-        name: nginx
-        state: installed
-      when: ansible_os_family == "RedHat"
-    - name: install package if ubuntu
-      ansible.builtin.apt:
-        name: nginx
-        stete: installed
-      when: ansible_os_family == "Debian"
+  - name: install packages using loops concept in redhat machine
+    ansible.bultin.dnf:
+      name: {{ item }}
+      state: installed
+    loop:
+    - gcc
+    - mysql
+    - git
+    - zip
+    when: ansible_os_family == "RedHat"
+
+  - name: install packages using loops in ubuntu machine
+    ansible.builtin.apt:
+      name: {{ item }}
+      state: installed
+    loop:
+    - gcc
+    - mysql
+    - git
+    - zip
+    when: ansible_os_family == "Debian"
